@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { Provider } from "react-redux";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "./App.css";
+import AddWine from "./components/AddWine";
+// import AddContact from "./components/AddContact";
+// import EditContact from "./components/EditContact";
+import Home from "./components/Home";
+import Layout from "./components/Layout";
+// import DefaultLayout from "./components/DefaultLayout";
+// import contactReducer from "./redux/slices/contactReducer";
+import store from "./store/store";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Provider store={store}>
+        <BrowserRouter>
+          <ToastContainer />
+          <Layout>
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route path="/add" element={<AddWine />} />
+            </Routes>
+          </Layout>
+        </BrowserRouter>
+      </Provider>
+    </>
   );
 }
 
