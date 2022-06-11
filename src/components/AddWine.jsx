@@ -1,19 +1,25 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { addWine } from "../store/slices/winesReducer";
-import { NavDropdown } from "react-bootstrap"
+import { NavDropdown } from "react-bootstrap";
+import 'react-toastify/dist/ReactToastify.css';
+import "../assets/styles/AddWine.css"
+import imagen from "../assets/images/Frente-Bodega.jpeg"
 
 
 const AddWine = () => {
+  const isLogIn = useSelector((state) => state.isLogIn);
+  const user = useSelector((state) => state.loggedUser);
+
   const [brand, setBrand] = useState("Marca");
   const [varietal, setVarietal] = useState("Varietal");
   const [harvest, setHarvest] = useState("Cosecha");
-  const [lotnumber, setLotNumber] = useState("")
-  const [exportbill, setExportBill] = useState("")
-  const [dispatchday, setDispatchDay] = useState("")
-  const [destiny, setDestiny] = useState("Destino")
+  const [lotnumber, setLotNumber] = useState("");
+  const [exportbill, setExportBill] = useState("");
+  const [dispatchday, setDispatchDay] = useState("");
+  const [destiny, setDestiny] = useState("Destino");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -21,10 +27,11 @@ const AddWine = () => {
     setVarietal({ selectedValue: e.target.value });
     setBrand({ selectedValue: e.target.value });
     setHarvest({ selectedValue: e.target.value });
-    setDestiny({ selectedValue: e.target.value })
+    setDestiny({ selectedValue: e.target.value });
   };
   // console.log("esto seria: ", varietal)
   // console.log("y esto marca", brand)
+  console.log("usuario con true o", user.isadmin)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,125 +42,148 @@ const AddWine = () => {
       lotnumber,
       exportbill,
       dispatchday,
-      destiny
+      destiny,
     };
-    console.log("data soy yo ", data)
+    console.log("data soy yo ", data);
     dispatch(addWine(data));
     // toast.success("Registro agregado satisfactoriamente");
     navigate("/");
   };
 
   return (
-    <div className="addContainer">
-    <div className="col-md-6 shadow mx-auto p-5">
-      <div className="row">
-      <h1 className="display-3 my-5 text-center">Agregar Registro</h1>
+    <div className="add">
+      {!isLogIn ? (
+        <div className="add">
+        <img
+          src={"https://familiamillan.com/wp-content/uploads/2022/03/Frente-Bodega-Pan-8-14-2048x1175.jpg"}
+          alt=""
+          className="imagen"
+        />
 
-        {/* <div className="col-md-6 shadow mx-auto p-5"> */}
+      </div>)
+      : (
+      <div className="col-md-6 shadow mx-auto p-5">
+        <div className="row">
+          <h1 className="display-3 my-5 text-center">Agregar Registro</h1>
           <form onSubmit={handleSubmit}>
             <div className="form-group ">
               <NavDropdown title={brand} id="basic-nav-dropdown">
                 <NavDropdown.Item onClick={(e) => setBrand(e.target.value)}>
-                  <option value="CORDERO CON PIEL DE LOBO" onChange={(e) => handleChange(e)}>
-                  CORDERO CON PIEL DE LOBO
+                  <option
+                    value="CORDERO CON PIEL DE LOBO"
+                    onChange={(e) => handleChange(e)}
+                  >
+                    CORDERO CON PIEL DE LOBO
                   </option>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={(e) => setBrand(e.target.value)}>
                   <option value="PISPI" onChange={(e) => handleChange(e)}>
-                  PISPI
+                    PISPI
                   </option>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={(e) => setBrand(e.target.value)}>
-                  <option value="CORDERO CON PIEL DE LOBO" onChange={(e) => handleChange(e)}>
-                  CORDERO CON PIEL DE LOBO
+                  <option
+                    value="CORDERO CON PIEL DE LOBO"
+                    onChange={(e) => handleChange(e)}
+                  >
+                    CORDERO CON PIEL DE LOBO
                   </option>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={(e) => setBrand(e.target.value)}>
-                  <option value="SAPO DE OTRO POZO" onChange={(e) => handleChange(e)}>
-                  SAPO DE OTRO POZO
+                  <option
+                    value="SAPO DE OTRO POZO"
+                    onChange={(e) => handleChange(e)}
+                  >
+                    SAPO DE OTRO POZO
                   </option>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={(e) => setBrand(e.target.value)}>
-                  <option value="MOSQUITA MUERTA" onChange={(e) => handleChange(e)}>
-                  MOSQUITA MUERTA
+                  <option
+                    value="MOSQUITA MUERTA"
+                    onChange={(e) => handleChange(e)}
+                  >
+                    MOSQUITA MUERTA
                   </option>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={(e) => setBrand(e.target.value)}>
                   <option value="MALCRIADO" onChange={(e) => handleChange(e)}>
-                  MALCRIADO
+                    MALCRIADO
                   </option>
                 </NavDropdown.Item>
               </NavDropdown>
             </div>
             <div className="form-group ">
-            <NavDropdown title={varietal} id="basic-nav-dropdown">
+              <NavDropdown title={varietal} id="basic-nav-dropdown">
                 <NavDropdown.Item onClick={(e) => setVarietal(e.target.value)}>
                   <option value="Malbec" onChange={(e) => handleChange(e)}>
-                  Malbec
+                    Malbec
                   </option>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={(e) => setVarietal(e.target.value)}>
                   <option value="Blend" onChange={(e) => handleChange(e)}>
-                  Blend
+                    Blend
                   </option>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={(e) => setVarietal(e.target.value)}>
                   <option value="Bonarda" onChange={(e) => handleChange(e)}>
-                  Bonarda
+                    Bonarda
                   </option>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={(e) => setVarietal(e.target.value)}>
                   <option value="Torrontes" onChange={(e) => handleChange(e)}>
-                  Torrontes
+                    Torrontes
                   </option>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={(e) => setVarietal(e.target.value)}>
-                  <option value="Cabernet Suavignon" onChange={(e) => handleChange(e)}>
-                  Cabernet Suavignon
+                  <option
+                    value="Cabernet Suavignon"
+                    onChange={(e) => handleChange(e)}
+                  >
+                    Cabernet Suavignon
                   </option>
                 </NavDropdown.Item>
               </NavDropdown>
             </div>
             <div className="form-group">
-            <NavDropdown title={harvest} id="basic-nav-dropdown">
+              <NavDropdown title={harvest} id="basic-nav-dropdown">
                 <NavDropdown.Item onClick={(e) => setHarvest(e.target.value)}>
                   <option value="2016" onChange={(e) => handleChange(e)}>
-                  2016
+                    2016
                   </option>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={(e) => setHarvest(e.target.value)}>
                   <option value="2017" onChange={(e) => handleChange(e)}>
-                  2017
+                    2017
                   </option>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={(e) => setHarvest(e.target.value)}>
                   <option value="2018" onChange={(e) => handleChange(e)}>
-                  2018
+                    2018
                   </option>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={(e) => setHarvest(e.target.value)}>
                   <option value="2019" onChange={(e) => handleChange(e)}>
-                  2019
+                    2019
                   </option>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={(e) => setHarvest(e.target.value)}>
                   <option value="2019" onChange={(e) => handleChange(e)}>
-                  2019
+                    2019
                   </option>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={(e) => setHarvest(e.target.value)}>
                   <option value="2020" onChange={(e) => handleChange(e)}>
-                  2020
+                    2020
                   </option>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={(e) => setHarvest(e.target.value)}>
                   <option value="2021" onChange={(e) => handleChange(e)}>
-                  2021
+                    2021
                   </option>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={(e) => setHarvest(e.target.value)}>
                   <option value="2022" onChange={(e) => handleChange(e)}>
-                  2022
+                    2022
                   </option>
                 </NavDropdown.Item>
               </NavDropdown>
@@ -186,25 +216,25 @@ const AddWine = () => {
               />
             </div>
             <div className="form-group">
-            <NavDropdown title={destiny} id="basic-nav-dropdown">
+              <NavDropdown title={destiny} id="basic-nav-dropdown">
                 <NavDropdown.Item onClick={(e) => setDestiny(e.target.value)}>
                   <option value="BRASIL" onChange={(e) => handleChange(e)}>
-                  BRASIL
+                    BRASIL
                   </option>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={(e) => setDestiny(e.target.value)}>
                   <option value="BOLIVIA" onChange={(e) => handleChange(e)}>
-                  BOLIVIA
+                    BOLIVIA
                   </option>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={(e) => setDestiny(e.target.value)}>
                   <option value="PERÚ" onChange={(e) => handleChange(e)}>
-                  PERÚ
+                    PERÚ
                   </option>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={(e) => setDestiny(e.target.value)}>
                   <option value="ECUADOR" onChange={(e) => handleChange(e)}>
-                  ECUADOR
+                    ECUADOR
                   </option>
                 </NavDropdown.Item>
               </NavDropdown>
@@ -218,9 +248,9 @@ const AddWine = () => {
               />
             </div>
           </form>
-        {/* </div> */}
-      </div>
-    </div>
+        </div>
+      </div>)
+}
     </div>
   );
 };

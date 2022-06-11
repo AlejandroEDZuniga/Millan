@@ -11,7 +11,13 @@ router.get("/", (req, res, next) => {
     })
     .catch(next);
 });
-
+router.get("/logged", validateToken, (req, res, next) => {
+  Admin.findByPk(req.user.id)
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch(next);
+});
 router.post("/addAdmin", (req, res, next) => {
   Admin.create(req.body)
     .then((data) => {

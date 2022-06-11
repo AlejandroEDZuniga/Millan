@@ -11,34 +11,36 @@ router.get("/:id", (req, res, next) => {
     .catch(next);
 });
 
+// router.get("/", (req, res, next) => {
+//   Wines.findAll()
+//     .then((data) => {
+//       res.status(200).json(data);
+//     })
+//     .catch(next);
+// });
+
+//LIKE NO TIENE QUE IR, SI NO QUE TIENE QUE IR LA VARIABLE, QUENO SE COMO HACER QUE LLEGUE
 router.get("/", (req, res, next) => {
-  if (req.query.item) {
+  console.log("parametros", req.query)
+  if (req.query) {
     // const filter = req.query.item.split(" ")[0]; //Solo la primera palabra del query
-    const filter = req.query.item; //PRUEBA
+    const { 
+      brand,
+      varietal,
+      harvest,
+      lotnumber
+  } = req.query 
+  console.log("brandingtong",brand )
+
+    const filter = req.query; //PRUEBA
+    console.log("filtro", filter)
+
     Wines.findAll({
       where: {
-        [Op.or]: [
-          {
-            brand: {
-              [Op.like]: `%${filter}%`,
-            },
-          },
-          {
-            varietal: {
-              [Op.like]: `%${filter}%`,
-            },
-          },
-          {
-            harvest: {
-              [Op.like]: `%${filter}%`,
-            },
-          },
-          {
-            lotnumber: {
-              [Op.like]: `%${filter}%`,
-            },
-          },
-        ],
+        brand: brand,
+        varietal: varietal,
+        harvest: harvest,
+        lotnumber: lotnumber
       },
     })
       .then((data) => {
@@ -47,10 +49,10 @@ router.get("/", (req, res, next) => {
       .catch(next);
   } else {
     Wines.findAll()
-      .then((data) => {
-        res.status(200).json(data);
-      })
-      .catch(next);
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch(next);
   }
 });
 

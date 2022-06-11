@@ -8,7 +8,7 @@ export const setUser = createAsyncThunk("SET_USER", async (data, thunkAPI) => {
     const token = localStorage.getItem("millanfamily");
 
     if (token) {
-      const req = await axios.get(`/api/users/logged`, {
+      const req = await axios.get(`/api/admin/logged`, {
         headers: { authorization: token },
       });
 

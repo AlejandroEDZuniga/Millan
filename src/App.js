@@ -7,6 +7,8 @@ import AddWine from "./components/AddWine";
 // import EditContact from "./components/EditContact";
 import Home from "./components/Home";
 import Layout from "./components/Layout";
+import Login from "./components/Login";
+import ShowResults from "./components/ShowResults";
 // import DefaultLayout from "./components/DefaultLayout";
 // import contactReducer from "./redux/slices/contactReducer";
 import store from "./store/store";
@@ -21,6 +23,8 @@ function App() {
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route path="/add" element={<AddWine />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/results" element={<ShowResults/>}/>
             </Routes>
           </Layout>
         </BrowserRouter>
