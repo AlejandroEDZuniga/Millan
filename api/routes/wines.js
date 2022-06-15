@@ -11,13 +11,13 @@ router.get("/:id", (req, res, next) => {
     .catch(next);
 });
 
-// router.get("/", (req, res, next) => {
-//   Wines.findAll()
-//     .then((data) => {
-//       res.status(200).json(data);
-//     })
-//     .catch(next);
-// });
+router.get("/edit", (req, res, next) => {
+  Wines.findAll()
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch(next);
+});
 
 //LIKE NO TIENE QUE IR, SI NO QUE TIENE QUE IR LA VARIABLE, QUENO SE COMO HACER QUE LLEGUE
 router.get("/", (req, res, next) => {

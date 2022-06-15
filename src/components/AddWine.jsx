@@ -7,10 +7,12 @@ import { NavDropdown } from "react-bootstrap";
 import 'react-toastify/dist/ReactToastify.css';
 import "../assets/styles/AddWine.css"
 import imagen from "../assets/images/Frente-Bodega.jpeg"
+import Error404 from "./Error404";
 
 
 const AddWine = () => {
   const isLogIn = useSelector((state) => state.isLogIn);
+  const {isadmin} = useSelector ((state)=> state)
   const user = useSelector((state) => state.loggedUser);
 
   const [brand, setBrand] = useState("Marca");
@@ -46,21 +48,14 @@ const AddWine = () => {
     };
     console.log("data soy yo ", data);
     dispatch(addWine(data));
-    // toast.success("Registro agregado satisfactoriamente");
+    toast.success("Registro agregado satisfactoriamente");
     navigate("/");
   };
 
   return (
     <div className="add">
-      {!isLogIn ? (
-        <div className="add">
-        <img
-          src={"https://familiamillan.com/wp-content/uploads/2022/03/Frente-Bodega-Pan-8-14-2048x1175.jpg"}
-          alt=""
-          className="imagen"
-        />
-
-      </div>)
+      {!isLogIn && isadmin ? (
+        <Error404/> )
       : (
       <div className="col-md-6 shadow mx-auto p-5">
         <div className="row">
@@ -79,14 +74,6 @@ const AddWine = () => {
                 <NavDropdown.Item onClick={(e) => setBrand(e.target.value)}>
                   <option value="PISPI" onChange={(e) => handleChange(e)}>
                     PISPI
-                  </option>
-                </NavDropdown.Item>
-                <NavDropdown.Item onClick={(e) => setBrand(e.target.value)}>
-                  <option
-                    value="CORDERO CON PIEL DE LOBO"
-                    onChange={(e) => handleChange(e)}
-                  >
-                    CORDERO CON PIEL DE LOBO
                   </option>
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={(e) => setBrand(e.target.value)}>

@@ -4,7 +4,7 @@ import axios from "axios";
 
 const getWines = createAsyncThunk("GET_WINES", () => {
   return axios
-    .get("/api/wines")
+    .get("/api/wines/edit")
     .then((res) => res.data)
     .then((wines) => wines)
     .catch((error) => message.error(`Error: ${error.message}`, 5));
@@ -26,22 +26,6 @@ const addWine = createAsyncThunk("ADD_WINE", (data) => {
     .then((wines) => wines)
     .catch((error) => message.error(`Error: ${error.message}`, 5));
 });
-// const getWine = createAsyncThunk("GET_WINE", (data) => {
-//   console.log("que llegara aca", data)
-//   return axios
-//     .get("/api/wines/", {
-//       brand: data.brand,
-//       varietal: data.varietal,
-//       harvest: parseInt(data.harvest),
-//       lotnumber: parseInt(data.lotnumber),
-//       exportbill: parseInt(data.exportbill),
-//       dispatchday: data.dispatchday,
-//       destiny: data.destiny,
-//     })
-//     .then((req) => req.body)
-//     .then((wines) => wines)
-//     .catch((error) => message.error(`Error: ${error.message}`, 5));
-// });
 const getWine = createAsyncThunk("GET_WINE", (data) => {
   console.log("aca llega la data del componente HOME", data)
   console.log("este es el put numero", data.lotNumber)
@@ -54,17 +38,6 @@ const getWine = createAsyncThunk("GET_WINE", (data) => {
       lotnumber: parseInt(data.lotNumber),
       }
     })
-  // axios
-    // .get("/api/wines/", {
-    //   brand: data.brand,
-    //   varietal: data.varietal,
-    //   harvest: parseInt(data.harvest),
-    //   lotnumber: parseInt(data.lotnumber),
-    //   exportbill: parseInt(data.exportbill),
-    //   dispatchday: data.dispatchday,
-    //   destiny: data.destiny,
-    // })
-    
     .then((res) => res.data)
     .then((wines) => wines)
     .catch((error) => message.error(`Error: ${error.message}`, 5));

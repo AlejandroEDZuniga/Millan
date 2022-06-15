@@ -26,8 +26,13 @@
 }
 .ulContainer{
     
-    padding-left: 150px;
+    padding-left: 100px;
     padding-top: 200px;
+    color: black !important
+
+}
+.nav-link{
+    color: black !important
 
 }
 .my-3{
@@ -89,12 +94,13 @@
     
     display: grid;
     grid-template-columns: 50% 50%;       
+    justify-content: left;
     
 }
 
 .infoContainer{
     display: flex;
-    justify-content: center;
+    justify-content: left;
     padding-top:200px
 }
 
@@ -103,5 +109,16 @@
 }
 .form-group{
     padding-top: 5px;
+}
+
+.imgError{
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+    height: fit-content;
+}
+.resultContainer{
+    padding-left: 25px;
+    padding-top: 25px;
 }
 

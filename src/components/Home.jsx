@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { NavDropdown } from "react-bootstrap";
-import { useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 // import  Home  from "../assets/styles/Home.css"
 import Search from "./Search";
 import { buscarProducto } from "../store/slices/winesReducer";
 import { useDispatch } from "react-redux";
 import { getWine } from "../store/slices/winesReducer";
+import { setSearchTrue } from "../store/slices/searchReducer";
 
 const Home = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [brand, setBrand] = useState("Marca");
   const [varietal, setVarietal] = useState("Varietal");
   const [harvest, setHarvest] = useState("Cosecha");
@@ -30,9 +31,14 @@ const Home = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    
+    dispatch(setSearchTrue())
     dispatch(getWine(data))      
     // e.target.value = "";
+    setTimeout(() => {
+      navigate("/results")
+    }, 1000);
+    
+  
     // console.log("eu soy datuli", data);
     
   };
@@ -172,9 +178,9 @@ const Home = () => {
           </div>
         </form>
       </div>
-      <div className="infoContainer">
+      {/* <div className="infoContainer">
         <Search />
-      </div>
+      </div> */}
     </div>
   );
 };
