@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import "../assets/styles/Home.css";
+import { Card, Button } from "react-bootstrap";
 
 const ShowResults = () => {
   const navigate = useNavigate;
@@ -27,6 +28,20 @@ const ShowResults = () => {
             </div>
           </div>
           <img src="http://www.mosquitamuertawines.com/wp-content/uploads/2013/10/CORDERO-BLEND-DE-MALBEC-ES-NEW.png" />
+          <Card style={{ width: "18rem" }}>
+            <div className="cardimg">
+            <Card.Img variant="top"  src="http://www.mosquitamuertawines.com/wp-content/uploads/2013/10/CORDERO-BLEND-DE-MALBEC-ES-NEW.png" />
+            </div>
+            <Card.Body>
+            
+              <Card.Title>Card Title</Card.Title>
+              <Card.Text>
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </Card.Text>
+              <Button variant="primary">Go somewhere</Button>
+            </Card.Body>
+          </Card>
         </div>
       ) : (
         <div> No hay naranja</div>

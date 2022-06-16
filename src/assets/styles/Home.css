@@ -69,6 +69,7 @@
     height: 40px;
     display: flex;
     justify-content: right;
+    padding-top: 10px;
     
 }
 
@@ -87,13 +88,13 @@
 
 .dropdown-menu.show{
     display: list-item !important;
-    justify-content: center !important;
-    align-content: center !important;
+    justify-content: left !important;
+    align-content: left !important;
 }
 .container{
     
     display: grid;
-    grid-template-columns: 50% 50%;       
+    grid-template-columns: 40% 60%;       
     justify-content: left;
     
 }
@@ -101,14 +102,11 @@
 .infoContainer{
     display: flex;
     justify-content: left;
-    padding-top:200px
+    padding-top:200px;
 }
 
 .addContainer{
     padding-top: 20px;
-}
-.form-group{
-    padding-top: 5px;
 }
 
 .imgError{
@@ -122,3 +120,18 @@
     padding-top: 25px;
 }
 
+.cardimg{
+    height: 400px;
+    width: 150px !important;
+    display: flex;
+    justify-content: center;
+
+}
+.card-img-top{
+    display: flex;
+    justify-content: center;
+}
+
+.text-white .bg-dark .text-center{
+    width: 100% !important;
+}

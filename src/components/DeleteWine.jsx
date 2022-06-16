@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-// import "../assets/styles/Home.css";
 import { getWines, deleteWine } from "../store/slices/winesReducer";
 // import { getWines } from "../store/slices/winesReducer";
 // import { Space } from "antd";
+// import "../assets/styles/Home.css";
+
 
 const DeleteWine = () => {
   const wine = useSelector((state) => [...state.wines]);
@@ -46,7 +47,7 @@ const DeleteWine = () => {
             Refrescar
           </button> */}
         </div>
-        <div className="col-md-12 mx-auto">
+        <div className="">
           <table className="table table-hover">
             <thead className="text-white bg-dark text-center">
               <tr>
@@ -58,7 +59,6 @@ const DeleteWine = () => {
                 <th scope="col">Factura</th>
                 <th scope="col">Dia de despacho</th>
                 <th scope="col">Destino</th>
-
               </tr>
             </thead>
             <tbody>
@@ -72,14 +72,13 @@ const DeleteWine = () => {
                   <td>{wine.exportbill}</td>
                   <td>{wine.dispatchday}</td>
                   <td>{wine.destiny}</td>
-
                   <td>
-                    <Link
+                    {/* <Link
                       to={`edit/${wine.id}`}
                       className="btn btn-small btn-primary pr-2 "
                     >
                       Editar
-                    </Link>
+                    </Link> */}
                     <button
                       type="button"
                       onClick={() => handleRemove(wine.id)}

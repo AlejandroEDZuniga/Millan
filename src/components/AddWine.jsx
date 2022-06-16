@@ -86,6 +86,14 @@ const AddWine = () => {
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={(e) => setBrand(e.target.value)}>
                   <option
+                    value="PERRO CALLEJERO"
+                    onChange={(e) => handleChange(e)}
+                  >
+                    PERRO CALLEJERO
+                  </option>
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={(e) => setBrand(e.target.value)}>
+                  <option
                     value="MOSQUITA MUERTA"
                     onChange={(e) => handleChange(e)}
                   >

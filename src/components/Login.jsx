@@ -6,9 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser, setUserVoid } from "../store/slices/loggedUserReducer";
 import { useNavigate } from "react-router-dom";
 import { setLogginTrue, setLogginFalse } from "../store/slices/authReducer";
-// import { getContacts } from "../store/slices/contactReducer";
 import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 import "../assets/styles/Login.css";
 
@@ -30,31 +29,24 @@ export default function Login(props) {
 
   const onSubmit = (e) => {
     if (e.target) e.preventDefault();
-
     axios
       .post("/api/auth/login", value)
-
       .then((res) => res.data)
       .then((data) => {
         localStorage.setItem("millanfamily", `Bearer ${data.token}`);
         dispatch(setLogginTrue());
         dispatch(setUser());
         toast.success("Bienvenido/a");
-
-        // getContacts();
-        navigate("/add");
+        navigate("/");
       })
       .catch((err) => {
         toast.error("Usuario y/o Contraseña incorrectos");
         dispatch(setLogginFalse());
       });
-      
-
   };
 
-  console.log("user", user)
   function logOut(e) {
-      e.preventDefault()
+    e.preventDefault();
     localStorage.removeItem("millanfamily");
     dispatch(setUserVoid());
   }

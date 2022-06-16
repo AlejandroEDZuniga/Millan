@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavDropdown } from "react-bootstrap";
 import { Navigate, useNavigate } from "react-router";
 // import  Home  from "../assets/styles/Home.css"
 import Search from "./Search";
 import { buscarProducto } from "../store/slices/winesReducer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getWine } from "../store/slices/winesReducer";
 import { setSearchTrue } from "../store/slices/searchReducer";
 
 const Home = () => {
   const navigate = useNavigate();
+  const wines = useSelector((state) => state.wines);
+  const search = useSelector((state) => state.search);
   const [brand, setBrand] = useState("Marca");
   const [varietal, setVarietal] = useState("Varietal");
   const [harvest, setHarvest] = useState("Cosecha");
@@ -27,21 +29,19 @@ const Home = () => {
     harvest,
     lotNumber
   };
-  console.log("numero es undefined?", lotNumber)
 
   const handleSearch = (e) => {
     e.preventDefault();
-    dispatch(setSearchTrue())
-    dispatch(getWine(data))      
-    // e.target.value = "";
-    setTimeout(() => {
-      navigate("/results")
-    }, 1000);
-    
-  
-    // console.log("eu soy datuli", data);
-    
+    dispatch(getWine(data))          
+       dispatch(setSearchTrue())
+ // setTimeout(() => {
+      // navigate("/results")
+    // }, 1000);
   };
+  useEffect(() => {
+    
+  }, [wines])
+  
 
   return (
     <div className="container">
@@ -119,6 +119,14 @@ const Home = () => {
               </NavDropdown.Item>
               <NavDropdown.Item onClick={(e) => setVarietal(e.target.value)}>
                 <option
+                  value="Cabernet Suavignon"
+                  onChange={(e) => handleChange(e)}
+                >
+                  Cabernet Suavignon
+                </option>
+              </NavDropdown.Item>
+              <NavDropdown.Item onClick={(e) => setVarietal(e.target.value)}>
+                <option
                   value="Torrontes"
                   onChange={(e) => handleChange(e)}
                 >
@@ -138,6 +146,38 @@ const Home = () => {
 
           <div className="containerItem">
             <NavDropdown title={harvest} className="drop">
+            <NavDropdown.Item>
+                <option
+                  value="2016"
+                  onClick={(e) => setHarvest(e.target.value)}
+                >
+                  2016
+                </option>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <option
+                  value="2017"
+                  onClick={(e) => setHarvest(e.target.value)}
+                >
+                  2017
+                </option>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <option
+                  value="2018"
+                  onClick={(e) => setHarvest(e.target.value)}
+                >
+                  2018
+                </option>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <option
+                  value="2019"
+                  onClick={(e) => setHarvest(e.target.value)}
+                >
+                  2019
+                </option>
+              </NavDropdown.Item>
               <NavDropdown.Item>
                 <option
                   value="2020"
@@ -156,8 +196,7 @@ const Home = () => {
               </NavDropdown.Item>
             </NavDropdown>
           </div>
-
-          <div className="form-group my-3">
+          <div className="form-group">
             <input
               type="number"
               placeholder="Nro. Lote"
@@ -181,6 +220,26 @@ const Home = () => {
       {/* <div className="infoContainer">
         <Search />
       </div> */}
+      <div className="infoContainer">
+      {wines.length >0 ? (
+        <div>
+        {wines.map((wines, id)=>
+          <div key={id}>
+          <div>LOTE {wines.lotnumber}</div>
+          <div>{wines.brand} {wines.varietal} {wines.harvest}</div>
+        <div>
+          Factura de exportación Nro: {wines.exportbill} - Fecha de despacho:{" "}
+          {wines.dispatchday} - Mercado de destino: {wines.destiny}
+        </div>
+        <div>Producido y fraccionado por Millan S.A. INV B70417, EXP B89997.</div>
+        </div>
+          )}
+          </div>
+        
+      ) : (
+        <h1> Realice su busqueda</h1>
+      )}
+    </div>
     </div>
   );
 };

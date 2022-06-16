@@ -7,18 +7,14 @@ const Search = () => {
   const wines = useSelector((state) => state.wines);
   const search = useSelector((state) => state.search);
   const dispatch = useDispatch();
-
-  // React.useEffect(() => {
-  //   if (search) {
-  //     axios.get(`/api/wines/`).then((res) => res.data);
-  //     // .then((data) => {
-  //     //     // dispatch(setProductos(shuffle(data)));
-  //     // });
-  //   }
-  // }, [wines, dispatch]);
+  const data ={}
+  React.useEffect(() => {
+   
+  }, []);
   return (
     <div>
       {search ? (
+        
         <div>
           <div>LOTE {wines[0].lotnumber}</div>
           <div>{wines[0].brand} {wines[0].varietal} {wines[0].harvest}</div>
