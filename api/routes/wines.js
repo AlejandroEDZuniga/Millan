@@ -12,7 +12,6 @@ router.get("/edit", (req, res, next) => {
     .catch(next);
 });
 
-
 router.get("/:id", (req, res, next) => {
   Wines.findByPk(req.params.id)
     .then((data) => {
@@ -21,26 +20,17 @@ router.get("/:id", (req, res, next) => {
     .catch(next);
 });
 
-
-
-
-
-
-//LIKE NO TIENE QUE IR, SI NO QUE TIENE QUE IR LA VARIABLE, QUENO SE COMO HACER QUE LLEGUE
 router.get("/", (req, res, next) => {
-  console.log("parametros", req.query)
   if (req.query) {
-    // const filter = req.query.item.split(" ")[0]; //Solo la primera palabra del query
     const { 
       brand,
       varietal,
       harvest,
       lotnumber
   } = req.query 
-  console.log("brandingtong",brand )
 
     const filter = req.query; //PRUEBA
-    console.log("filtro", filter)
+    // console.log("filtro", filter)
 
     Wines.findAll({
       where: {
@@ -78,7 +68,6 @@ router.post("/add", (req, res, next) => {
     })
     .catch(next);
 });
-
 
 
 router.put("/:id", (req, res, next) => {

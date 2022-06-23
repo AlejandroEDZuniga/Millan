@@ -16,32 +16,29 @@ const Home = () => {
   const [varietal, setVarietal] = useState("Varietal");
   const [harvest, setHarvest] = useState("Cosecha");
   const [lotNumber, setLotNumber] = useState("");
-  const dispatch = useDispatch()
+
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setBrand({ selectedValue: e.target.value });
-    setLotNumber(e.target.value)
-
+    setLotNumber(e.target.value);
   };
   const data = {
     brand,
     varietal,
     harvest,
-    lotNumber
+    lotNumber,
   };
 
   const handleSearch = (e) => {
     e.preventDefault();
-    dispatch(getWine(data))          
-       dispatch(setSearchTrue())
- // setTimeout(() => {
-      // navigate("/results")
+    dispatch(getWine(data));
+    dispatch(setSearchTrue());
+    // setTimeout(() => {
+    // navigate("/results")
     // }, 1000);
   };
-  useEffect(() => {
-    
-  }, [wines])
-  
+  useEffect(() => {}, [wines]);
 
   return (
     <div className="container">
@@ -102,18 +99,12 @@ const Home = () => {
                 </option>
               </NavDropdown.Item>
               <NavDropdown.Item onClick={(e) => setVarietal(e.target.value)}>
-                <option
-                  value="Blend"
-                  onChange={(e) => handleChange(e)}
-                >
+                <option value="Blend" onChange={(e) => handleChange(e)}>
                   Blend
                 </option>
               </NavDropdown.Item>
               <NavDropdown.Item onClick={(e) => setVarietal(e.target.value)}>
-                <option
-                  value="Bonarda"
-                  onChange={(e) => handleChange(e)}
-                >
+                <option value="Bonarda" onChange={(e) => handleChange(e)}>
                   Bonarda
                 </option>
               </NavDropdown.Item>
@@ -126,18 +117,12 @@ const Home = () => {
                 </option>
               </NavDropdown.Item>
               <NavDropdown.Item onClick={(e) => setVarietal(e.target.value)}>
-                <option
-                  value="Torrontes"
-                  onChange={(e) => handleChange(e)}
-                >
+                <option value="Torrontes" onChange={(e) => handleChange(e)}>
                   Torrontes
                 </option>
               </NavDropdown.Item>
               <NavDropdown.Item onClick={(e) => setVarietal(e.target.value)}>
-                <option
-                  value="Syrah"
-                  onChange={(e) => handleChange(e)}
-                >
+                <option value="Syrah" onChange={(e) => handleChange(e)}>
                   Syrah
                 </option>
               </NavDropdown.Item>
@@ -146,7 +131,7 @@ const Home = () => {
 
           <div className="containerItem">
             <NavDropdown title={harvest} className="drop">
-            <NavDropdown.Item>
+              <NavDropdown.Item>
                 <option
                   value="2016"
                   onClick={(e) => setHarvest(e.target.value)}
@@ -194,6 +179,14 @@ const Home = () => {
                   2021
                 </option>
               </NavDropdown.Item>
+              <NavDropdown.Item>
+                <option
+                  value="2022"
+                  onClick={(e) => setHarvest(e.target.value)}
+                >
+                  2022
+                </option>
+              </NavDropdown.Item>
             </NavDropdown>
           </div>
           <div className="form-group">
@@ -207,13 +200,13 @@ const Home = () => {
           </div>
           <div className="buttonContainer">
             {/* <button className="button">Verificación</button> */}
-          
-          <input
-            type="submit"
-            placeholder="Submit"
-            value="Verificar"
-            className="button"
-          />
+
+            <input
+              type="submit"
+              placeholder="Submit"
+              value="Verificar"
+              className="button"
+            />
           </div>
         </form>
       </div>
@@ -221,25 +214,48 @@ const Home = () => {
         <Search />
       </div> */}
       <div className="infoContainer">
-      {wines.length >0 ? (
-        <div>
-        {wines.map((wines, id)=>
-          <div key={id}>
-          <div>LOTE {wines.lotnumber}</div>
-          <div>{wines.brand} {wines.varietal} {wines.harvest}</div>
-        <div>
-          Factura de exportación Nro: {wines.exportbill} - Fecha de despacho:{" "}
-          {wines.dispatchday} - Mercado de destino: {wines.destiny}
-        </div>
-        <div>Producido y fraccionado por Millan S.A. INV B70417, EXP B89997.</div>
-        </div>
-          )}
+        {wines.length > 0 ? (
+          <div>
+            <div>
+              <div>LOTE {wines[0].lotnumber}</div>
+              <div>
+                {wines[0].brand} {wines[0].varietal} {wines[0].harvest}
+              </div>
+              <br />
+            </div>
+            {wines.map((wines, id) => (
+              <div key={id}>
+                {/* <div>LOTE {wines.lotnumber}</div>
+                <div>
+                  {wines.brand} {wines.varietal} {wines.harvest}
+                </div> */}
+                <div>
+                  Factura de exportación Nro: {wines.exportbill} - Fecha de
+                  despacho: {wines.dispatchday} - Mercado de destino:{" "}
+                  {wines.destiny}
+                </div>
+                <div>
+                  Producido y fraccionado por Millan S.A. INV B70417, EXP
+                  B89997.
+                </div>
+                <br />
+              </div>
+            ))}
           </div>
-        
-      ) : (
-        <h1> Realice su busqueda</h1>
-      )}
-    </div>
+        ) : (
+          <div>
+            {wines.length === 0 && search ? (
+              <div>
+                <h1> No se encontro ningun resultado</h1>
+              </div>
+            ) : (
+              <div>
+                <h1> Realice su busqueda</h1>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

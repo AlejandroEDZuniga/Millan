@@ -42,11 +42,11 @@ const Header = () => {
                 </Nav>
               </Nav>
             ) : null}
-            <Container>
+            {/* <Container>
               <Link to="/results" className="navbar-brand ml-5">
                 Resultados
               </Link>
-            </Container>
+            </Container> */}
           </Nav>
         </Container>
       </Navbar>

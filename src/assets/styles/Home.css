@@ -135,3 +135,8 @@
 .text-white .bg-dark .text-center{
     width: 100% !important;
 }
+
+.imgErr{
+    width: 200px;
+    height: 200px;
+}

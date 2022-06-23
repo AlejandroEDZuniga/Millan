@@ -1,4 +1,8 @@
-import { createReducer, createAsyncThunk, createAction } from "@reduxjs/toolkit";
+import {
+  createReducer,
+  createAsyncThunk,
+  createAction,
+} from "@reduxjs/toolkit";
 import { message } from "antd";
 import axios from "axios";
 
@@ -10,9 +14,7 @@ const getWines = createAsyncThunk("GET_WINES", () => {
     .catch((error) => message.error(`Error: ${error.message}`, 5));
 });
 
-
 const addWine = createAsyncThunk("ADD_WINE", (data) => {
-  console.log("que llegara aca", data)
   return axios
     .post("/api/wines/add", {
       brand: data.brand,
@@ -27,17 +29,16 @@ const addWine = createAsyncThunk("ADD_WINE", (data) => {
     .then((wines) => wines)
     .catch((error) => message.error(`Error: ${error.message}`, 5));
 });
+
 const getWine = createAsyncThunk("GET_WINE", (data) => {
-  console.log("aca llega la data del componente HOME", data)
-  console.log("este es el put numero", data.lotNumber)
-  return axios.get(
-    '/api/wines/',{
+  return axios
+    .get("/api/wines/", {
       params: {
-      brand: data.brand,
-      varietal: data.varietal,
-      harvest: parseInt(data.harvest),
-      lotnumber: parseInt(data.lotNumber),
-      }
+        brand: data.brand,
+        varietal: data.varietal,
+        harvest: parseInt(data.harvest),
+        lotnumber: parseInt(data.lotNumber),
+      },
     })
     .then((res) => res.data)
     .then((wines) => wines)
@@ -59,9 +60,6 @@ const editWine = createAsyncThunk("PUT_WINE", (data) => {
     dispatchday,
     destiny,
   } = data;
-
-  // console.log("la data", data);
-
   return axios
     .put(`/api/wines/${id}`, {
       brand,
@@ -89,4 +87,4 @@ const winesReducer = createReducer([], {
   [editWine.fulfilled]: (state, action) => action.payload,
 });
 
-export { winesReducer, getWines, getWine,  addWine, deleteWine, editWine };
+export { winesReducer, getWines, getWine, addWine, deleteWine, editWine };
